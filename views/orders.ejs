@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <style>
+            *{box-sizing: border-box;margin: 0;}
+            body{width:75%;margin: 0 auto;}
+            #add {margin: 5px 0px}
+            td:last-child{ text-align: right }
+            form{
+                float: right;
+                margin-left: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        <a href='/order/add'><button id='add' type="button" class="btn btn-primary">Add Order</button></a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"> Id </th>
+                    <th scope="col"> Customer Id </th>
+                    <th scope="col"> Product Id </th>
+                    <th scope="col" colspan="2"> Quantity </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach( (order) => { %>
+                    <tr>
+                        <td> <%= order.order_id %> </td>
+                        <td> <%= order.customer_id %> </td>
+                        <td> <%= order.product_id %> </td>
+                        <td> <%= order.quantity %> </td>
+                        <td>
+                            <a href='/order/edit/<%= order.order_id %>'><button type="button" class="btn btn-primary btn-sm">Edit</button></a>
+                            <form action="/order/delete/<%= order.order_id %>" method="POST">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </body>
+</html>

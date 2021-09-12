@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simple CMS</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <style>
+            body{width:75%;margin: 0 auto;}
+            .my-col{
+                color: white;
+                min-height: 150px;
+                text-align: center;
+                padding-top: 40px;
+                margin: 10px;
+            }
+            .my-col1{
+                background-color: #61B546;
+            }
+            .my-col2{
+                background-color: #4CB5F5;
+            }
+            .my-col3{
+                background-color: #f4af22;
+            }
+            .my-col4{
+                background-color: #ed2939;
+            }
+        </style>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        <div class="container my-container">
+            <div class="row">
+              <div class="col my-col my-col1">
+                <h1><%= customers_num[0].count %></h1>
+                <p>Customers</p>
+              </div>
+              <div class="col my-col my-col2">
+                <h1><%= products_num[0].count %></h1>
+                <p>Products</p>
+              </div>
+              <div class="col my-col my-col3">
+                <h1><%= orders_num[0].count %></h1>
+                <p>Orders</p>
+              </div>
+              <div class="col my-col my-col4">
+                <h1><%= total %></h1>
+                <p>Total Sales</p>
+              </div>
+            </div>
+        </div>
+    </body>
+</html>
