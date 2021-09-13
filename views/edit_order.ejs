@@ -12,18 +12,23 @@
 
         <form action="" method="POST">
             <br>
-            <div><label class="form-label" for="customer_ids">Customer Id</label><br>
+            <div>
+                <label class="form-label" for="customer_ids">Customer Id</label><br>
                 <select name="customer_ids" class="form-select" aria-label="Default select example">
                     <% customer_ids.forEach( (customer_id) => { %>
-                        <option value="<%= customer_id.customer_id %>"><%= customer_id.customer_id %></option>
-                    <% }) %>
+                        <option value="<%= customer_id.customer_id %>" 
+                            <%= (customer_id.customer_id == order.customer_id) ? 'selected' : null %> >
+                            <%= customer_id.customer_id %></option>
+                    <% }) %> 
                 </select><br>
             </div>
             <div>
-            <label class="form-label" for="product_ids">Product Id</label><br>
+                <label class="form-label" for="product_ids">Product Id</label><br>
                 <select name="product_ids" class="form-select" aria-label="Default select example">
                     <% product_ids.forEach( (product_id) => { %>
-                        <option value="<%= product_id.product_id %>"><%= product_id.product_id %></option>
+                        <option value="<%= product_id.product_id %>"
+                            <%= (product_id.product_id == order.product_id) ? 'selected' : null %> >
+                            <%= product_id.product_id %></option>
                     <% }) %>
                 </select><br>
             </div>
