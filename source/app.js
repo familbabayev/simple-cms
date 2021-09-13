@@ -1,21 +1,22 @@
-var express = require('express');
-var path = require('path');
-var mysql = require('mysql2');
-var util = require('util');
+import express from 'express';
+import mysql from 'mysql2';
+import util from 'util';
+import dotenv from 'dotenv';
+import { URL } from 'url';
 
-var app = express();
+const app = express();
+dotenv.config();
 
 app.set('view engine', 'ejs');
 
-const publicDir = path.join(__dirname, '../public')
-app.use(express.static(publicDir));
-
+const __dirname = new URL('.', import.meta.url).pathname;
+app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended : false}));
 
 const conn = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "password",
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
     database: "cms"
 });
 
