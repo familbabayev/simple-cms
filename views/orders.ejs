@@ -22,10 +22,13 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col"> Order Id </th>
                     <th scope="col"> Id </th>
-                    <th scope="col"> Customer Id </th>
-                    <th scope="col"> Product Id </th>
-                    <th scope="col" colspan="2"> Quantity </th>
+                    <th scope="col"> Customer Name </th>
+                    <th scope="col"> Id </th>
+                    <th scope="col"> Product Name </th>
+                    <th scope="col"> Quantity </th>
+                    <th scope="col" colspan="2"> Price </th>
                 </tr>
             </thead>
             <tbody>
@@ -33,8 +36,11 @@
                     <tr>
                         <td> <%= order.order_id %> </td>
                         <td> <%= order.customer_id %> </td>
+                        <td> <%= order.customer_name %> </td>
                         <td> <%= order.product_id %> </td>
+                        <td> <%= order.product_name %> </td>
                         <td> <%= order.quantity %> </td>
+                        <td> <%= order.price * order.quantity %> $</td>
                         <td>
                             <a href='/order/edit/<%= order.order_id %>'><button type="button" class="btn btn-primary btn-sm">Edit</button></a>
                             <form action="/order/delete/<%= order.order_id %>" method="POST">

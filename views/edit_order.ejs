@@ -13,22 +13,22 @@
         <form action="" method="POST">
             <br>
             <div>
-                <label class="form-label" for="customer_ids">Customer Id</label><br>
-                <select name="customer_ids" class="form-select" aria-label="Default select example">
-                    <% customer_ids.forEach( (customer_id) => { %>
-                        <option value="<%= customer_id.customer_id %>" 
-                            <%= (customer_id.customer_id == order.customer_id) ? 'selected' : null %> >
-                            <%= customer_id.customer_id %></option>
+                <label class="form-label" for="customers">Customer Id</label><br>
+                <select name="customers" class="form-select" aria-label="Default select example">
+                    <% customers.forEach( (customer) => { %>
+                        <option value="<%= customer.customer_id %>" 
+                            <%= (customer.customer_id == order.customer_id) ? 'selected' : null %> >
+                            <%= customer.customer_id %> <%= customer.name %></option>
                     <% }) %> 
                 </select><br>
             </div>
             <div>
-                <label class="form-label" for="product_ids">Product Id</label><br>
-                <select name="product_ids" class="form-select" aria-label="Default select example">
-                    <% product_ids.forEach( (product_id) => { %>
-                        <option value="<%= product_id.product_id %>"
-                            <%= (product_id.product_id == order.product_id) ? 'selected' : null %> >
-                            <%= product_id.product_id %></option>
+                <label class="form-label" for="products">Product Id</label><br>
+                <select name="products" class="form-select" aria-label="Default select example">
+                    <% products.forEach( (product) => { %>
+                        <option value="<%= product.product_id %>"
+                            <%= (product.product_id == order.product_id) ? 'selected' : null %> >
+                            <%= product.product_id %> <%= product.name %></option>
                     <% }) %>
                 </select><br>
             </div>

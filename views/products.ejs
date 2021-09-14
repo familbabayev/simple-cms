@@ -34,7 +34,7 @@
                         <td> <%= product.product_id %> </td>
                         <td> <%= product.name %> </td>
                         <td> <%= product.quantity %> </td>
-                        <td> <%= product.price %> </td>
+                        <td> <%= product.price %> $</td>
                         <td>
                             <a href='/product/edit/<%= product.product_id %>'><button type="button" class="btn btn-primary btn-sm">Edit</button></a>
                             <form action="/product/delete/<%= product.product_id %>" method="POST">

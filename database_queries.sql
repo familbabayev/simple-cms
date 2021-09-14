@@ -28,8 +28,12 @@ CREATE TABLE orders(
 	product_id INT,
     quantity INT,
     PRIMARY KEY(order_id),
-    FOREIGN KEY(customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY(customer_id) REFERENCES customers(customer_id)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY(product_id) REFERENCES products(product_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 

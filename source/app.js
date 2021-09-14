@@ -218,8 +218,15 @@ app.post('/product/edit/:product_id', async (req, res) => {
 
 // Order routes
 app.get('/orders', async (req, res) => {
+    let sql = `SELECT order_id, orders.customer_id, customers.name AS customer_name, 
+                      orders.product_id, products.name AS product_name, price, orders.quantity 
+               FROM customers, orders, products
+               WHERE orders.customer_id = customers.customer_id
+               AND orders.product_id = products.product_id
+               ORDER BY order_id`;
+
     try{
-        const orders = await query("SELECT * FROM orders");
+        const orders = await query(sql);
 
         res.render('orders', {orders:orders});
     } catch (error) {
@@ -230,10 +237,10 @@ app.get('/orders', async (req, res) => {
 
 app.get('/order/add', async (req, res) => {
     try{
-        let customer_ids = await query("SELECT customer_id FROM customers");
-        let product_ids = await query("SELECT product_id FROM products");
+        let customers = await query("SELECT customer_id, name FROM customers");
+        let products = await query("SELECT product_id, name FROM products");
 
-        res.render('add_order', {customer_ids:customer_ids, product_ids:product_ids})
+        res.render('add_order', {customers:customers, products:products})
     } catch(error) {
         throw error;
     }
@@ -241,8 +248,8 @@ app.get('/order/add', async (req, res) => {
 
 
 app.post('/order/add', async (req, res) => {
-    var selected_cus = req.body.customer_ids;
-    var selected_pro = req.body.product_ids;
+    var selected_cus = req.body.customers;
+    var selected_pro = req.body.products;
     var quantity = req.body.quantity;
 
     let sql = `INSERT INTO orders (customer_id, product_id, quantity) 
@@ -273,11 +280,11 @@ app.post('/order/delete/:order_id', async (req, res) => {
 
 app.get('/order/edit/:order_id', async (req, res) => {
     try{
-        let customer_ids = await query("SELECT customer_id FROM customers");
-        let product_ids = await query("SELECT product_id FROM products");
+        let customers = await query("SELECT customer_id, name FROM customers");
+        let products = await query("SELECT product_id, name FROM products");
         let order = await query(`SELECT * FROM orders WHERE order_id='${req.params.order_id}'`)
 
-        res.render('edit_order', {customer_ids:customer_ids, product_ids:product_ids, order:order[0]})
+        res.render('edit_order', {customers:customers, products:products, order:order[0]})
     } catch(error) {
         throw error;
     }
@@ -285,8 +292,8 @@ app.get('/order/edit/:order_id', async (req, res) => {
 
 
 app.post('/order/edit/:order_id', async (req, res) => {
-    const update_cus_id = req.body.customer_ids;
-    const update_pro_id = req.body.product_ids;
+    const update_cus_id = req.body.customers;
+    const update_pro_id = req.body.products;
     const update_quantity = req.body.quantity;
 
     const order_id = req.params.order_id;
